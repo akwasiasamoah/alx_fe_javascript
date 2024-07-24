@@ -102,8 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function syncWithServer(newQuote = null) {
     try {
-      const response = await fetch(SERVER_URL);
-      const serverQuotes = await response.json();
+      const serverQuotes = await fetchQuotesFromServer();
       if (newQuote) {
         // Simulate posting new quote to server
         serverQuotes.push(newQuote);
@@ -117,6 +116,12 @@ document.addEventListener("DOMContentLoaded", () => {
     } catch (error) {
       console.error("Error syncing with server:", error);
     }
+  }
+
+  async function fetchQuotesFromServer() {
+    const response = await fetch(SERVER_URL);
+    const serverQuotes = await response.json();
+    return serverQuotes;
   }
 
   function mergeQuotes(localQuotes, serverQuotes) {
@@ -134,5 +139,5 @@ document.addEventListener("DOMContentLoaded", () => {
   loadQuotes();
   newQuoteButton.addEventListener("click", showRandomQuote);
   categoryFilter.addEventListener("change", filterQuotes);
-  setInterval(syncWithServer, 300000);
+  setInterval(syncWithServer, 300000); // Sync with server every 5 minutes
 });
