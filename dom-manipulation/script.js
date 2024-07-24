@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const savedQuotes = localStorage.getItem("quotes");
     if (savedQuotes) {
       quotes = JSON.parse(savedQuotes);
-      // Display the first quote (or a random one if preferred)
+
       showRandomQuote();
       updateQuoteList();
     }
