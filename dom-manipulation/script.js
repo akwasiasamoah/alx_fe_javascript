@@ -58,6 +58,11 @@ document.addEventListener("DOMContentLoaded", () => {
     sessionStorage.setItem("lastViewedQuote", JSON.stringify(randomQuote));
   }
 
+  // Filter quotes based on selected category
+  function filterQuotes() {
+    showRandomQuote();
+  }
+
   // Handle new quote form submission
   addQuoteForm.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -70,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
       categories.add(quoteCategory);
       saveQuotes();
       populateCategories();
-      showRandomQuote();
+      filterQuotes();
       addQuoteForm.reset();
     }
   });
@@ -97,17 +102,16 @@ document.addEventListener("DOMContentLoaded", () => {
       importedQuotes.forEach((quote) => categories.add(quote.category));
       saveQuotes();
       populateCategories();
-      showRandomQuote();
+      filterQuotes();
       alert("Quotes imported successfully!");
     };
     fileReader.readAsText(event.target.files[0]);
   });
 
-  // Filter quotes based on selected category
-  categoryFilter.addEventListener("change", showRandomQuote);
-
   // Initial setup
   loadQuotes();
 
+  // Event Listeners
   newQuoteButton.addEventListener("click", showRandomQuote);
+  categoryFilter.addEventListener("change", filterQuotes);
 });
