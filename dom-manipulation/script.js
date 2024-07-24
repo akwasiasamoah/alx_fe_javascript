@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Array to store quotes
   let quotes = [
     {
       text: "The only limit to our realization of tomorrow is our doubts of today.",
@@ -12,27 +11,21 @@ document.addEventListener("DOMContentLoaded", () => {
     { text: "The purpose of our lives is to be happy.", category: "Happiness" },
   ];
 
-  // Select DOM elements
   const quoteDisplay = document.getElementById("quote-display");
   const addQuoteFormContainer = document.getElementById(
     "add-quote-form-container"
   );
 
-  // Function to display a random quote
   function showRandomQuote() {
     if (quotes.length === 0) return;
 
-    // Get a random index
     const randomIndex = Math.floor(Math.random() * quotes.length);
     const randomQuote = quotes[randomIndex];
 
-    // Display the random quote
     quoteDisplay.textContent = `"${randomQuote.text}" - ${randomQuote.category}`;
   }
 
-  // Function to create and display the add quote form
   function createAddQuoteForm() {
-    // Create form elements
     const form = document.createElement("form");
     form.id = "add-quote-form";
 
@@ -56,14 +49,12 @@ document.addEventListener("DOMContentLoaded", () => {
     submitButton.textContent = "Add Quote";
     submitButton.type = "submit";
 
-    // Append elements to the form
     form.appendChild(textLabel);
     form.appendChild(document.createElement("br"));
     form.appendChild(categoryLabel);
     form.appendChild(document.createElement("br"));
     form.appendChild(submitButton);
 
-    // Handle form submission
     form.onsubmit = (event) => {
       event.preventDefault();
 
@@ -71,17 +62,15 @@ document.addEventListener("DOMContentLoaded", () => {
       const newQuoteCategory = categoryInput.value.trim();
 
       if (newQuoteText && newQuoteCategory) {
-        // Add new quote to the array
         quotes.push({ text: newQuoteText, category: newQuoteCategory });
-        // Clear input fields
+
         textInput.value = "";
         categoryInput.value = "";
-        // Update display
+
         showRandomQuote();
       }
     };
 
-    // Add the form to the container
     addQuoteFormContainer.innerHTML = ""; // Clear any existing form
     addQuoteFormContainer.appendChild(form);
   }
